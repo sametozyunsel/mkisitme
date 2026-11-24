@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /Wordaf
+Disallow: /api/
+Sitemap: https://mkisitme.com/sitemap.xml
