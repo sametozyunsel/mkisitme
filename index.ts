@@ -1,13 +1,10 @@
-import "dotenv/config";
 import express from "express";
-import path from "node:path";
-import { registerApplicationRoutes } from "./server/app";
+import bundledApp from "./dist/vercel-handler.js";
 
+// Vercel imports this root entry as an Express Function. All project-local
+// TypeScript imports are bundled by build:vercel, avoiding Node ESM extension
+// resolution failures at runtime.
 const app = express();
-registerApplicationRoutes(app, {
-  serveClient: true,
-  // Vercel serves files from the project-level public directory through its CDN.
-  staticDir: path.resolve(process.cwd(), "public"),
-});
+app.use(bundledApp);
 
 export default app;
