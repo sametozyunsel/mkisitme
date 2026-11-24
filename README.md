@@ -15,8 +15,8 @@ Platform configuration is readable and editable through `webdev.config`. Default
 
 ## Vercel deployment
 
-This project exposes the Express app from the root `index.ts` entry point for Vercel. The committed `vercel.json` selects the Express framework and runs `pnpm run build:vercel`; that command builds the Vite client and copies its output into the root `public/` directory for Vercel's static asset CDN. Leave Vercel's Output Directory unset/default; do not set it to `dist` or `dist/public` for this Express deployment.
+Vercel serves the Express application from the root `index.ts` entry point. The `build:vercel` command bundles all project-local server imports into `dist/vercel-handler.js` before deployment; the root entry imports that generated JavaScript with an explicit `.js` extension. This avoids Node ESM runtime errors caused by extensionless TypeScript imports. The same build command copies the Vite output into root `public/` for Vercel's static asset CDN. Leave Vercel's Output Directory unset/default.
 
-The public site and seeded blog can render without a database. To enable persistent blog administration, configure `DATABASE_URL`, `MK_ADMIN_USERNAME`, `MK_ADMIN_PASSWORD`, and `MANUS_JWT_SECRET` in the Vercel project's Environment Variables. Add any Manus OAuth/API variables only if those platform integrations are being used. Redeploy after changing environment variables.
+The public site and seeded blog can render without a database. To enable persistent blog administration, configure `DATABASE_URL`, `MK_ADMIN_USERNAME`, `MK_ADMIN_PASSWORD`, and `MANUS_JWT_SECRET` in the Vercel project's Environment Variables. Add Manus OAuth/API variables only if those platform integrations are used. Redeploy after changing environment variables.
 
 The regular `pnpm build` and `pnpm start` commands remain available for Node.js hosting outside Vercel.
