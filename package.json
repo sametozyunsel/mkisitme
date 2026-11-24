@@ -14,7 +14,7 @@
     "db:migrate": "drizzle-kit migrate",
     "dev:static": "vite --host 0.0.0.0 --port ${PORT:-3000} --strictPort",
     "build:static": "vite build",
-    "build:vercel": "pnpm build && pnpm exec esbuild server/vercel.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/vercel-handler.js && rm -rf public && mkdir -p public && cp -R dist/public/. public/"
+    "build:vercel": "pnpm build && pnpm exec esbuild server/vercel.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/vercel-handler.js && cp server/vercel-handler.d.ts dist/vercel-handler.d.ts && rm -rf public && mkdir -p public && cp -R dist/public/. public/"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",
